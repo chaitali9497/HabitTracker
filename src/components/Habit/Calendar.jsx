@@ -40,7 +40,7 @@ function Calendar(props) {
 			<Month
 				key={index}
 				{...props}
-				{{
+				{...{
 					date,
 					visibleMonthsCount,
 					isDaySquare,
