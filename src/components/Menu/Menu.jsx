@@ -6,7 +6,7 @@ import MenuItemList from './MenuItemList';
 import MenuItem from './MenuItem';
 
 // utils
-import clearLocalStorage from '../../utils/clearLocalStorage';
+//import clearLocalStorage from '../../utils/clearLocalStorage';
 
 // icons
 import { BsFillDatabaseFill } from "react-icons/bs";
