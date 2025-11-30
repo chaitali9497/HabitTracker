@@ -4,34 +4,53 @@ import styles from '../../css/WeekdayChart.module.css';
 import getCompletionCountPerDay from '../../utils/getCompletionCountPerDay';
 
 // chart js
-import { BarElement, Chart as ChartJS } from "chart.js";
+import {
+	Chart as ChartJS,
+	CategoryScale,
+	LinearScale,
+	BarElement
+} from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-ChartJS.register(BarElement);
+ChartJS.register(CategoryScale, LinearScale, BarElement);
 
-function WeekdayChart({ options, days, frequency, color }) {
+function WeekdayChart({
+	options = {},
+	days = [],
+	frequency = 1,
+	color = "#4b7bec"
+}) {
+
 	const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-	const data = getCompletionCountPerDay(days, frequency);
 
-	const config = {
-		data: {
-			labels: [...WEEKDAYS.slice(1), 'Sun'],
-			datasets: [{
-				label: 'WeekdayChart',
-				data: [...data.slice(1), data[0]],
+	// ensure 7 values — fallback to zeros
+	let data = getCompletionCountPerDay(days, frequency) || [];
+	if (data.length < 7) {
+		data = [...data, ...Array(7 - data.length).fill(0)];
+	}
 
-				backgroundColor: color,
-				borderRadius: 10,
-				borderSkipped: false
-			}]
-		},
+	// reorder Mon → Sun
+	const labels = [...WEEKDAYS.slice(1), WEEKDAYS[0]];
+	const values = [...data.slice(1), data[0]];
 
-		options
+	const chartData = {
+		labels,
+		datasets: [{
+			label: 'WeekdayChart',
+			data: values,
+			backgroundColor: color,
+			borderRadius: 10,
+			borderSkipped: false
+		}]
 	};
 
-	return (
-		<Bar {...config} />
-	);
+	const finalOptions = {
+		responsive: true,
+		maintainAspectRatio: false,
+		...options
+	};
+
+	return <Bar data={chartData} options={finalOptions} />;
 }
 
 export default WeekdayChart;
