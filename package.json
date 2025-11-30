@@ -2,7 +2,7 @@
 	"name": "califitoga",
 	"description": "Califitoga is a straightforward habit tracker that doesn’t require registration. Easily mark your completed days, track your progress, and keep a journal for each habit.",
 	"version": "0.20.3",
-	"homepage": "https://github.com/chaitali9497/HabitTracker",
+	
 	"private": true,
 	"dependencies": {
 		"chart.js": "^4.4.3",
