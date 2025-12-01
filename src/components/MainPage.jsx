@@ -12,7 +12,6 @@ import Placeholder from './Placeholder';
 import { ReactComponent as Calendar } from '../img/calendar.svg';
 import { MdAddToPhotos } from "react-icons/md";
 import { useHabitsStore } from '../stores/habitsStore';
-import { Component } from 'react';
 
 const mainVariants = {
 	initial: { opacity: 0 },
